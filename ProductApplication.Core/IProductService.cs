@@ -5,6 +5,6 @@ namespace ProductApplication.Core
     public interface IProductService
     {
         ProductDto CreateProduct(CreateProductRequest model);
-        IEnumerable<ProductDto> GetAllProducts(PaginationParameters paginationParameters);
+        ProductsResult GetAllProducts(PaginationParameters paginationParameters);
     }
 }

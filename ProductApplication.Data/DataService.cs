@@ -11,9 +11,11 @@ namespace ProductApplication.Data
         ];
         private int _nextId = 3;
 
-        public IEnumerable<Product> GetAllProcucts(int skip = 0, int take = 100)
+        public (int, IEnumerable<Product>) GetAllProcucts(int skip = 0, int take = 100)
         {
-            return _products.Skip(skip).Take(take).ToList();
+            var total = _products.Count;
+
+            return (total, _products.Skip(skip).Take(take).ToList());
         }
 
         public Product CreateProduct(Product product)

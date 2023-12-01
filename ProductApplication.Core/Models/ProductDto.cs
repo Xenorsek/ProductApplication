@@ -8,6 +8,7 @@ namespace ProductApplication.Core.Models
 {
     public class ProductDto
     {
+        public int Id { get; set; }
         public required string Name { get; set; }
         public required string Code { get; set; }
         public double Price { get; set; }

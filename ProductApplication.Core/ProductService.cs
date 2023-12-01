@@ -13,20 +13,24 @@ namespace ProductApplication.Core
             _dataService = dataService;
         }
 
-        public IEnumerable<ProductDto> GetAllProducts(PaginationParameters paginationParameters)
+        public ProductsResult GetAllProducts(PaginationParameters paginationParameters)
         {
             var skip = (paginationParameters.PageNumber - 1) * paginationParameters.PageSize;
             var take = paginationParameters.PageSize;
 
-            var products = _dataService.GetAllProcucts(skip, take);
+            var result = _dataService.GetAllProcucts(skip, take);
+            var products = result.Item2;
             var productsDto = products.Select(x => new ProductDto
             {
+                Id = x.Id,
                 Name = x.Name,
                 Code = x.Code,
                 Price = x.Price
             }).ToList();
 
-            return productsDto;
+            var productsResult = new ProductsResult { Products = productsDto, TotalProducts = result.Item1 };
+
+            return productsResult;
         }
 
         public ProductDto CreateProduct(CreateProductRequest model)
